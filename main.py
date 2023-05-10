@@ -6,8 +6,8 @@ key = input("Enter Key : ")
 run = f"yt-dlp --allow-u -F {mpd}"
 title = input("Enter Name: ")
 sub = subprocess.run(run)
-vid_q = input("Enter Number of Quality: ")
-aud = input("Enter Nunber of Audio: ")
+vid_q = input("Enter Video Quality: ")
+aud = input("Enter Audio: ")
 sub1 = f"yt-dlp --allow-u -f {vid_q} {mpd} -o enc.mp4"
 print("Executing: ", sub1)
 video = subprocess.run(sub1)
