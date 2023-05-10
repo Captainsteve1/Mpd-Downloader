@@ -1,15 +1,24 @@
 import os
 import subprocess 
 
-m = input("Enter Url :")
-k = input("Enter Key : ")
-run = f"yt-dlp --allow-u -F {m}"
-k = subprocess.run(run)
-mq = input("Enter Number of Quality: ")
-mq1 = input("Enter Nunber of Audio: ")
-run1 = f"yt-dlp -f {mq} {m} -o enc.mp4"
-video = subprocess.run(run1)
+mpd = input("Enter Url :")
+key = input("Enter Key : ")
+run = f"yt-dlp --allow-u -F {mpd}"
+title = input("Enter Name: ")
+sub = subprocess.run(run)
+vid_q = input("Enter Number of Quality: ")
+aud = input("Enter Nunber of Audio: ")
+sub1 = f"yt-dlp --allow-u -f {vid_q} {mpd} -o enc.mp4"
+print("Executing: ", sub1)
+video = subprocess.run(sub1)
+aud1 = f"yt-dlp --allow-u -f {aud} {mpd} -o encaud.mp4"
+sub3 = subprocess.run(aud1) #execute 
 
-aud = f"yt-dlp -f {mq1} {m} -o encaud.mp4")
-r = subprocess.run(aud)
-
+vid_decrypt = f"mp4decrypt --key {key} enc.mp4 dec_enc.mp4"
+vid_dc = subprocess.run(vid_decrypt)
+aud_decrypt = f"mp4decrypt --key {key} encaud.mp4 dec_encaud.mp4"
+aud_dc = subprocess.run(aud_decrypt)
+ 
+merge =f'mkvmerge -o {title}.{vid_q}q.WEB-DL.AAC.{aud}.TONY.mkv "dec_enc.mp4" "dec_encaud.mp4"'
+#lets merge
+output = subprocess.run(merge)
