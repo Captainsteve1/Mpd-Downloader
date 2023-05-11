@@ -8,7 +8,7 @@ title = input("Enter Name: ")
 sub = subprocess.run(run)
 vid_q = input("Enter Video Quality: ")
 aud = input("Enter Audio: ")
-sub1 = f"yt-dlp --allow-u -f {vid_q} {mpd} -o enc.mp4"
+sub1 = f"yt-dlp --allow-u -f bv[height={vid_q}] {mpd} --external-downloader aria2c --external-downloader-args "-x 1 -j 16 -k 1M" -o enc.mp4"
 print("Executing: ", sub1)
 video = subprocess.run(sub1)
 aud1 = f"yt-dlp --allow-u -f {aud} {mpd} -o encaud.mp4"
